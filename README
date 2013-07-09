@@ -1,0 +1,37 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4654
+
+DESCRIPTION
+This plugin automatically adapts information like "last modified" timestamps
+and copyright notices, or applies any other substitution before each file
+save. Where and what is replaced can be configured globally and for each
+individual buffer.
+
+The plugin ships with configuration defaults which handle the most common
+copyright notices, e.g.:
+    Copyright: (C) 2011-2013 Ingo Karkat
+and modification timestamps such as
+    Last Change: Mon 08 Jul 2013 09:36:03 CET
+    Modified: 2013 Jul 08
+
+SOURCE
+- The regular expression for updating copyright notices is derived from
+    http://vim.wikia.com/wiki/Automatically_Update_Copyright_Notice_in_Files
+
+RELATED WORKS
+- ferallastchange.vim (vimscript #680) is an old plugin that searches for a
+  prefix and then updates the timestamp in a certain format.
+- timstamp.vim (vimscript #371) takes pattern and replacement parts like this
+  plugin (the replacement part also supports some custom tokens e.g. for
+  hostname), and is functionally very close.
+- timestamp.vim (vimscript #923) is based on timstamp.vim. It allows only one
+  pattern and feeds the replacement part to strftime(), making it less
+  general.
+- lastmod.vim (vimscript #3578) is a short and simple plugin for replacing one
+  pattern with a timestamp in the first N lines.
+
+USAGE
+The adaptation happens before every buffer save (BufWritePre event), e.g.
+with the :write command. No action required. You can configure
+(g:AutoAdapt_Rules) and disable this, though:
+
+:NoAutoAdapt            Turn off automatic adapting for the current buffer.
