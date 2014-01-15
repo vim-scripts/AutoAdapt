@@ -8,16 +8,18 @@ individual buffer.
 
 The plugin ships with configuration defaults which handle the most common
 copyright notices, e.g.:
-    Copyright: (C) 2011-2013 Ingo Karkat
+    Copyright: (C) 2011-2014 Ingo Karkat
 and modification timestamps such as
-    Last Change: Mon 08 Jul 2013 09:36:03 CET
-    Modified: 2013 Jul 08
+    Last Change: Wed 15 Jan 2014 21:38:00 WEST
+    Modified: 2014 Jan 15
 
 SOURCE
 - The regular expression for updating copyright notices is derived from
     http://vim.wikia.com/wiki/Automatically_Update_Copyright_Notice_in_Files
 
 RELATED WORKS
+- autodate.vim (vimscript #291) is an old plugin that can insert and update a
+  time stamp (between a prefix and postfix) in a certain format.
 - ferallastchange.vim (vimscript #680) is an old plugin that searches for a
   prefix and then updates the timestamp in a certain format.
 - timstamp.vim (vimscript #371) takes pattern and replacement parts like this
@@ -26,8 +28,14 @@ RELATED WORKS
 - timestamp.vim (vimscript #923) is based on timstamp.vim. It allows only one
   pattern and feeds the replacement part to strftime(), making it less
   general.
+- header.vim (vimscript #1142) insert or updates a header at the top, in a
+  rather primitive way, and limited to shell, Python, Perl, and Vim scripts.
 - lastmod.vim (vimscript #3578) is a short and simple plugin for replacing one
   pattern with a timestamp in the first N lines.
+- better-header.vim (vimscript #4676) can insert and update a header for
+  Python and shell scripts, and requires Python itself.
+- update-time (vimscript #4786) searches the first and last lines for a single
+  prefix and then automatically updates a following timestamp.
 
 USAGE
 The adaptation happens before every buffer save (BufWritePre event), e.g.
@@ -35,3 +43,16 @@ with the :write command. No action required. You can configure
 (g:AutoAdapt_Rules) and disable this, though:
 
 :NoAutoAdapt            Turn off automatic adapting for the current buffer.
+
+:AutoAdapt[!]           Turn on automatic adapting for the current buffer,
+                        after having it turned off via|:NoAutoAdapt|, or to
+                        enable adapting for a buffer when the automatic
+                        adapting has been configured to exclude the current
+                        buffer via g:AutoAdapt_FilePattern, or (with [!]) to
+                        override a configured Predicate which disables
+                        adaptation for the buffer.
+
+:Adapt[!]               Trigger manual adaptation of the current buffer (when
+                        automatic adaption has been turned off via
+                        :NoAutoAdapt). With [!] also overrides a configured
+                        Predicate which disables adaptation for the buffer.
